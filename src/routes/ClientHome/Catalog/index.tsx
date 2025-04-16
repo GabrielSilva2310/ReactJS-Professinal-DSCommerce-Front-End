@@ -1,28 +1,8 @@
 import './styles.css';
-import HeaderClient from '../../../components/HeaderClient';
 import SearchBar from '../../../components/SearchBar';
 import CatalogCard from '../../../components/CatalogCard';
 import ButtonNextPage from '../../../components/ButtonNextPage';
-import { ProductDTO } from '../../../models/product';
-
-const product : ProductDTO = {
-
-  id: 2,
-  name: "Smart TV",
-  description : "Essa Tv é de ultima geração",
-  price : 2190.0,
-  imgUrl : "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg",
-  categories : [
-        {
-            id: 2,
-            name: "Eletrônicos"
-        },
-        {
-            id: 3,
-            name: "Computadores"
-        }
-    ]
-}
+import * as productService from '../../../services/product-service';
 
 
 export default function Catalog() {
@@ -33,17 +13,11 @@ export default function Catalog() {
                     <SearchBar />
 
                     <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
-                        <CatalogCard product={product} />
+                        {
+                            productService.findAll().map(product =>
+                                <CatalogCard key={product.id} product={product} />
+                            )
+                        }
                     </div>
                     <ButtonNextPage />
                 </section>
