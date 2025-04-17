@@ -1,5 +1,4 @@
 import './styles.css';
-import computerImg from '../../assets/computer.png';
 import ProductCategory from '../ProductCategory';
 import { ProductDTO } from '../../models/product';
 
@@ -9,6 +8,8 @@ import { ProductDTO } from '../../models/product';
     product : ProductDTO;
 
  }
+
+
 
 export default function ProductDetailsCard({product} : Props) {
     
