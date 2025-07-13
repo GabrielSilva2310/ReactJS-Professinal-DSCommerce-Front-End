@@ -1,5 +1,4 @@
 import "./styles.css";
-import computerImg from "../../assets/computer.png";
 import { ProductDTO } from "../../models/product";
 import { Link } from "react-router-dom";
 
@@ -7,8 +6,14 @@ type Props = {
   product: ProductDTO;
 };
 
+
+
 export default function CatalogCard({ product }: Props) {
+  console.log("CatalogCard - product:", product);
+
   return (
+
+
     <Link to={`/product-details/${product.id}`}>
       <div className="dsc-card">
         <div className="dsc-catalog-card-top dsc-line-bottom">
