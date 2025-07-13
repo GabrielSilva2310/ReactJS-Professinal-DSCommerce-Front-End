@@ -9,7 +9,6 @@ type Props = {
 
 
 export default function CatalogCard({ product }: Props) {
-  console.log("CatalogCard - product:", product);
 
   return (
 

@@ -22,7 +22,7 @@ export default function ProductDetails() {
   const[product, setProduct] = useState<ProductDTO>();
 
   useEffect(()=> {
-    axios.get(productService.findById(Number(params.productId)))
+    productService.findById(Number(params.productId))
     .then(response => {
       console.log(response.data)
       setProduct(response.data)
