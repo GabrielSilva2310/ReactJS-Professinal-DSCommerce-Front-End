@@ -23,7 +23,7 @@ export default function ProductForm(){
             placeholder: "Nome",
         },
         price: {
-            value: "100",
+            value: "",
             id: "price",
             name: "price",
             type: "number",
@@ -63,6 +63,12 @@ export default function ProductForm(){
 
       },[]);
 
+      
+    function handleTurnDirty(name: string) {
+      const newFormData = forms.toDirty(formData, name);
+      setFormData(newFormData);
+    }
+
 
     return(
          <main>
@@ -74,7 +80,8 @@ export default function ProductForm(){
               <div>
                  <FormInput
                  { ...formData.name}
-                 className="dsc-form-control" 
+                 className="dsc-form-control"
+                 onTurnDirty={handleTurnDirty}  
                  onChange={handleInputChange}
                  />
                 <div className='dsc-form-error'>{formData.name.message}</div>
@@ -82,7 +89,8 @@ export default function ProductForm(){
               <div>
                   <FormInput
                  { ...formData.price}
-                 className="dsc-form-control" 
+                 className="dsc-form-control"
+                 onTurnDirty={handleTurnDirty} 
                  onChange={handleInputChange}
                  />
                 <div className="dsc-form-error">{formData.price.message}</div>
@@ -90,7 +98,8 @@ export default function ProductForm(){
               <div>
                   <FormInput
                  { ...formData.imgUrl}
-                 className="dsc-form-control" 
+                 className="dsc-form-control"
+                 onTurnDirty={handleTurnDirty}  
                  onChange={handleInputChange}
                  />
                 <div className='dsc-form-error'>{formData.name.imgUrl}</div>
