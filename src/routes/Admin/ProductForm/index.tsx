@@ -43,14 +43,13 @@ export default function ProductForm(){
     });
 
       function handleInputChange(event: any){
-      setFormData(forms.update(formData, event.target.name, event.target.value));
+         const dataUpdated = forms.update(formData, event.target.name, event.target.value);
+         const dataValidated = forms.validate(dataUpdated, event.target.name);
+         setFormData(dataValidated);
     
       }
 
       useEffect(() => {
-
-        const obj = forms.validate(formData, "name");
-        console.log(obj);
 
         if(isEditing){
           console.log(params.productId);
@@ -76,19 +75,25 @@ export default function ProductForm(){
                  <FormInput
                  { ...formData.name}
                  className="dsc-form-control" 
-                 onChange={handleInputChange}/>
+                 onChange={handleInputChange}
+                 />
+                <div className='dsc-form-error'>{formData.name.message}</div>
               </div>
               <div>
                   <FormInput
                  { ...formData.price}
                  className="dsc-form-control" 
-                 onChange={handleInputChange}/>
+                 onChange={handleInputChange}
+                 />
+                <div className="dsc-form-error">{formData.price.message}</div>
               </div>
               <div>
                   <FormInput
                  { ...formData.imgUrl}
                  className="dsc-form-control" 
-                 onChange={handleInputChange}/>
+                 onChange={handleInputChange}
+                 />
+                <div className='dsc-form-error'>{formData.name.imgUrl}</div>
               </div>
             </div>
 
