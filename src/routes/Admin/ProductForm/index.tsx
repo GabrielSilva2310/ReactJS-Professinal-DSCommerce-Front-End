@@ -9,6 +9,7 @@ import FormTextArea from '../../../components/FormTextArea';
 import { CategoryDTO } from '../../../models/category';
 import Select from 'react-select'
 import FormSelect from '../../../components/FormSelect';
+import { selectStyles } from '../../../services/select';
 
 
 
@@ -153,8 +154,9 @@ export default function ProductForm(){
               <div>
                 <FormSelect
                       {...formData.categories}
-                      className="dsc-form-control"
+                      className="dsc-form-control dsc-form-select-container"
                       options={categories}
+                      styles={selectStyles}
                       onChange={(obj: any) => {
                           const newFormData = forms.updateAndValidate(formData, "categories", obj);
                           setFormData(newFormData);
