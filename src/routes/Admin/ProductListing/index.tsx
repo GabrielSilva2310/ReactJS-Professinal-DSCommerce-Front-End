@@ -54,25 +54,29 @@ export default function ProductListing(){
               })
           },[queryParams])
 
-            function handleNewProductClick() {
-            navigate("/admin/products/create");
-            }
+             function handleNewProductClick() {
+              navigate("/admin/products/create");
+             }
 
-           function handleSearch(searchText: string){
-           setProducts([]);
-           setQueryParams({...queryParams, page: 0, name: searchText});
-            }
+            function handleSearch(searchText: string){
+             setProducts([]);
+             setQueryParams({...queryParams, page: 0, name: searchText});
+             }
 
             function handleNextPageClick(){
-            setQueryParams({...queryParams, page : queryParams.page+1})
+             setQueryParams({...queryParams, page : queryParams.page+1})
             }
 
-             function handleDialogInfoClose() {
+            function handleDialogInfoClose() {
              setDialogInfoData({ ...dialogInfoData, visible: false });
              }
 
+             function handleUpdateClick(productId: number) {
+              navigate(`/admin/products/${productId}`);
+             }
+
              function handleDeleteClick(productId: number) {
-             setDialogConfirmationData({ ...dialogConfirmationData, id: productId, visible: true });
+              setDialogConfirmationData({ ...dialogConfirmationData, id: productId, visible: true });
              }
 
 
@@ -132,7 +136,7 @@ export default function ProductListing(){
               <td><img className="dsc-product-listing-image" src={product.imgUrl}alt="Computer"/></td>
               <td className="dsc-tb768">R$ {product.price}</td>
               <td className="dsc-txt-left">{product.name}</td>
-              <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar"/></td>
+              <td><img onClick={() => handleUpdateClick(product.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar"/></td>
               <td><img onClick={() => handleDeleteClick(product.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar"/></td>
             </tr>
               )
