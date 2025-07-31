@@ -12,6 +12,9 @@ export default function Login(){
 
   const { setContextTokenPayload } = useContext(ContextToken);
 
+  const [submitResponseFail, setSubmitResponseFail] = useState(false);
+
+
   const [formData, setFormData] = useState<any>({
         username: {
             value: "",
@@ -35,16 +38,26 @@ export default function Login(){
 
 
   function handleSubmit(event: any){
+
     event.preventDefault();
-    console.log(forms.toValues(formData));
+
+    setSubmitResponseFail(false);
+
+    const formDataValidated = forms.dirtyAndValidateAll(formData);
+      if (forms.hasAnyInvalid(formDataValidated)) {
+          setFormData(formDataValidated);
+          return;
+      }
+
+
     authService.loginRequest(forms.toValues(formData))
     .then(response => {
       authService.saveAccessToken(response.data.access_token);
       setContextTokenPayload(authService.getAccessTokenPayload());
       navigate("/cart")
     })
-    .catch(error => {
-      console.log("Erro no login " + error);
+    .catch(() => {
+      setSubmitResponseFail(true);
     })
    
 
@@ -83,6 +96,14 @@ export default function Login(){
                 onChange={handleInputChange}/>
               </div>
             </div>
+
+            
+            {
+              submitResponseFail &&
+                <div className="dsc-form-global-error">
+                    Usuário ou senha inválidos
+                </div>
+            }
 
             <div className="dsc-login-form-buttons dsc-mt20">
               <button type="submit" className="dsc-btn dsc-btn-blue">Entrar</button>
