@@ -132,10 +132,10 @@ export default function ProductForm(){
             .then(() => {
                 navigate("/admin/products");
             })
-
-
-
-      //*console.log(forms.toValues(formData))
+            .catch(error => {
+                const newInputs = forms.setBackendErrors(formData, error.response.data.errors);
+                setFormData(newInputs);
+            });
     }
 
 
